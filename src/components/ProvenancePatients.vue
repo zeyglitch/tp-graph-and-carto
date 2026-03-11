@@ -3,13 +3,13 @@
     <h2>A) Provenance des patients aux urgences</h2>
 
     <h3>Diagramme en barres</h3>
-    <apexchart width="600" :options="optionsBarres" :series="donneesSeries"></apexchart>
+    <apexchart width="100%" height="350" :options="optionsBarres" :series="donneesSeries"></apexchart>
 
     <h3>Diagramme en barres horizontales</h3>
-    <apexchart width="600" :options="optionsBarresHorizontales" :series="donneesSeries"></apexchart>
+    <apexchart width="100%" height="350" :options="optionsBarresHorizontales" :series="donneesSeries"></apexchart>
 
     <h3>Camembert</h3>
-    <apexchart width="500" :options="optionsCamembert" :series="valeursCamembert"></apexchart>
+    <apexchart width="500" height="400" :options="optionsCamembert" :series="valeursCamembert"></apexchart>
   </div>
 </template>
 

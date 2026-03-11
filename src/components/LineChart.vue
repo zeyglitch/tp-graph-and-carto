@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Graphique en ligne - Ventes / Achats</h2>
-    <apexchart width="600" :options="options" :series="series"></apexchart>
+    <apexchart width="100%" height="400" :options="options" :series="series"></apexchart>
   </div>
 </template>
 
@@ -31,11 +31,18 @@ const options = {
   chart: {
     type: "line", // type de graphique
   },
+  colors: ['#667eea', '#f093fb'], // couleurs personnalisées
   stroke: {
     curve: 'smooth', // type de ligne
+    width: 3,
   },
   markers: {
     size: 5, // taille des marqueurs à chaque point
+  },
+  title: {
+    text: 'Ventes vs Achats (Janvier - Juin)',
+    align: 'center',
+    style: { fontSize: '16px', fontFamily: 'Inter, sans-serif' }
   },
 };
 </script>

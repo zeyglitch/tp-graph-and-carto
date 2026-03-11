@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>D) Évolution densité généralistes / spécialistes / pharmaciens / dentistes</h2>
-    <apexchart width="700" :options="options" :series="series"></apexchart>
+    <apexchart width="100%" height="420" :options="options" :series="series"></apexchart>
   </div>
 </template>
 
@@ -53,6 +53,7 @@ const options = {
   chart: {
     type: "line",
   },
+  colors: ['#e74c3c', '#3498db', '#f39c12', '#2ecc71'],
   stroke: {
     curve: 'smooth',
     width: 3,

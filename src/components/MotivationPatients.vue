@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>C) Motivation des patients pour venir aux urgences</h2>
-    <apexchart width="700" :options="options" :series="donneesSeries"></apexchart>
+    <apexchart width="100%" height="450" :options="options" :series="donneesSeries"></apexchart>
   </div>
 </template>
 

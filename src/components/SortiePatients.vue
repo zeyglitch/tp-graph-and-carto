@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>B) Sortie des patients aux urgences</h2>
-    <apexchart width="600" :options="options" :series="donneesSeries"></apexchart>
+    <apexchart width="100%" height="400" :options="options" :series="donneesSeries"></apexchart>
   </div>
 </template>
 
