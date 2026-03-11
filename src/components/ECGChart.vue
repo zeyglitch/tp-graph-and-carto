@@ -1,25 +1,47 @@
 <template>
   <div>
     <h2>ECG en temps réel (simulé)</h2>
-    <apexchart height="350" width="80%" :options="optionsGraphique" :series="series"></apexchart>
+    <div class="ecg-conteneur">
+      <apexchart height="350" width="100%" :options="optionsGraphique" :series="series"></apexchart>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import apexchart from "vue3-apexcharts";
 
 const optionsGraphique = {
-  chart: { type: "line", toolbar: { show: false } },
+  chart: {
+    type: "line",
+    toolbar: { show: false },
+    animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 100 } },
+    background: '#1a1a2e',
+  },
+  colors: ['#00ff88'],
   stroke: { curve: "smooth", width: 2 },
-  xaxis: { type: "numeric", tickAmount: 10 }, // nb de divisions sur l'axe X
-  yaxis: { min: -2, max: 2 }, // amplitude simulée d'un ECG
-  title: { text: "ECG en temps réel" },
-  grid: { borderColor: "#e7e7e7", strokeDashArray: 5 },
+  xaxis: {
+    type: "numeric",
+    tickAmount: 10,
+    labels: { style: { colors: '#888' } }
+  },
+  yaxis: {
+    min: -2, max: 2,
+    labels: { style: { colors: '#888' } }
+  },
+  title: {
+    text: "ECG en temps réel",
+    style: { color: '#ccc', fontSize: '16px', fontFamily: 'Inter, sans-serif' }
+  },
+  grid: { borderColor: "#333", strokeDashArray: 3 },
+  tooltip: { theme: 'dark' },
 };
 
 // Donnée du graphique (initialisées vides)
 const series = ref([{ name: "ECG", data: [] }]);
+
+// On garde l'id de l'intervalle pour le nettoyer quand on quitte
+let intervalId = null
 
 // Fonction pour générer un signal ECG simulé
 const genererSignalECG = () => {
@@ -29,7 +51,7 @@ const genererSignalECG = () => {
 // Mise à jour dynamique du tracé ECG
 onMounted(() => {
   let x = 0;
-  setInterval(() => {
+  intervalId = setInterval(() => {
     const nouveauPoint = { x: x++, y: genererSignalECG() }; // un nouveau point
     if (series.value[0].data.length > 50) {
       series.value[0].data.shift(); // on supprime le point le plus ancien
@@ -37,6 +59,18 @@ onMounted(() => {
     series.value[0].data.push(nouveauPoint); // on ajoute le nouveau point
   }, 100); // mise à jour toutes les 100 ms
 });
+
+// On arrête l'intervalle quand on change d'onglet
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
+})
 </script>
 
-<style scoped></style>
+<style scoped>
+.ecg-conteneur {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+</style>

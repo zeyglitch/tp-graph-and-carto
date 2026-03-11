@@ -59,5 +59,11 @@ onMounted(afficheCarto);
 
 <style scoped>
 /* il faut que la div ait une dimension non null */
-.map-container { width: 80%; height: 700px; margin: 20px; }
+.map-container {
+  width: 100%;
+  height: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 </style>
